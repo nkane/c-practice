@@ -8,7 +8,7 @@
  * complete one swing and the length of the pendulum is given by the
  * the formula:
  * 
- * length = g [time / (2 * pi)]^2
+ * length = g * [time / (2 * pi)]^2
  *
  * where pi, accurate to four decimal places, is equal to 3.1416 and
  * g is the gravitation constant equal to 32.2 feet / second^2. When
@@ -18,13 +18,36 @@
  * a swing that will be completed in one second. The length should be
  * displayed in inches and should have the folowing format:
  *
- * The length to copmlete one swing in one second is: _________
+ * The length to complete one swing in one second is: _________
  */
 
 #include <stdio.h>
 
+#define PI 3.1416f
+
+struct Clock 
+{
+	float Gravity;
+	float Time;
+};
+
+inline float PendulumLength(Clock *);
+
 int main(void)
 {
-	printf("Hello world!\n");
+	Clock C1 = { 32.0f, 1.0f };
+	
+	float length = PendulumLength(&C1);
+
+	printf("The length to complete one swing in one second is: %f\n", length);
+
 	return 0;
+}
+
+inline float PendulumLength(Clock *c)
+{
+	float result = 0.0f;
+	result =  c->Gravity * (c->Time / (2.0f * PI));
+	result *= result;
+	return result;
 }
