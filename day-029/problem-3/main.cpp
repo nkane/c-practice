@@ -13,7 +13,8 @@
  * | 1980 or later   | less than 3,500 lbs | 7		  | $35.50 |
  * |		     | more than 3,500 lbs | 8		  | $65.50 |
  * 
- * 
+ * Using the information, write a C program that accepts the yearh and weight of an automobile
+ * and determines and displays the weight clas and registration fee for the car.
  */
 
 #include <stdio.h>
