@@ -4,7 +4,6 @@
  * 
  * 2 4 6 8 10
  * 
- * 
  */
 
 #include <stdio.h>
@@ -12,5 +11,17 @@
 int
 main()
 {
+	int i = 10;
+	int j = 0;
+
+	while (i >= j)
+	{
+		if (!(j % 2))
+		{
+			printf("%d ", j);
+		}
+		++j;
+	}
+
 	return 0;
 }

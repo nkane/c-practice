@@ -11,8 +11,78 @@
 
 #include <stdio.h>
 
+#define len(array) (sizeof(array) / sizeof(array[0]))
+
+struct CardHand
+{
+	int Cards[3];
+	int HandValue;
+};
+
+inline CardHand
+CreateCardHand();
+
+inline int
+ComputeHandValue(CardHand *);
+
 int
 main()
 {
+	CardHand C = CreateCardHand();
+
 	return 0;
+}
+
+inline CardHand
+CreateCardHand()
+{
+	CardHand C = {};
+	
+	for (int i = 0; i < len(C.Cards); ++i)
+	{
+		printf("What is the number value of the %d cards:\n", i + 1);
+		scanf("%d", &C.Cards[i]);
+	}
+
+	C.HandValue = ComputeHandValue(&C);
+
+	return C;
+}
+
+inline int
+ComputeHandValue(CardHand *c)
+{
+	int sumOne = 0;
+	int sumTwo = 0;
+
+	for (int i = 0; i < len(c->Cards); ++i)
+	{
+		if (c->Cards[i] == 1) 
+		{
+			// Use as 11
+			sumOne += 11;
+
+			// Use as 1
+			sumTwo += 1;
+		}
+		else if (c->Cards[i] <= 10)
+		{
+			sumOne += c->Cards[i];
+			sumTwo += c->Cards[i];
+		}
+	}
+
+	if (!(sumOne == sumTwo))
+	{
+		if (sumOne > 21)
+		{
+			// this is a bust!
+			return sumTwo;
+		} else if (sumTwo > 21)
+		{
+			return sumOne;
+		}
+	}
+
+	return sumOne;
 }
