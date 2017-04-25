@@ -10,5 +10,26 @@
 int
 main()
 {
+	int inputAmounts = 0;
+	int i = 0;
+	int requestAmount = 0;
+	int sum = 0;
+
+	printf("Enter the amount iterations:\n");
+	scanf("%d", &inputAmounts);
+
+	while (i < inputAmounts) 
+	{
+		printf("Enter amount (iteration #%d):\n", (i + 1));
+		scanf("%d", &requestAmount);
+
+		sum += requestAmount;
+
+		requestAmount = 0;
+		++i;
+	}
+
+	printf("Total Iterations: %d - Total Sum: %d\n", inputAmounts, sum);
+
 	return 0;
 }
