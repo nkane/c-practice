@@ -11,8 +11,65 @@
 
 #include <stdio.h>
 
+struct UserInput
+{
+	int Iterations;
+	float Total;
+	float Average;
+};
+
+inline UserInput
+CreateUserInput();
+
+inline float
+ComputeAverageUI(UserInput *);
+
+inline void
+PrettyPrint(UserInput *);
+
 int
 main()
 {
+	UserInput UI = CreateUserInput();
+	float tempValue = 0.0f;
+
+	int i = 0;
+	while (i < UI.Iterations)
+	{
+		printf("Enter in value[%d]:\n", (i + 1));
+		scanf("%f", &tempValue);
+		UI.Total += tempValue;
+		++i;
+	}
+
+	UI.Average = ComputeAverageUI(&UI);
+
+	PrettyPrint(&UI);
+	
 	return 0;
+}
+
+inline UserInput
+CreateUserInput()
+{
+	UserInput UI = {};
+
+	printf("Please type in the total number of data values to be averaged:\n");
+	scanf("%d", &UI.Iterations);
+
+	return UI;
+}
+
+inline float
+ComputeAverageUI(UserInput *ui)
+{
+	float result = 0.0f;
+	result = (ui->Total / ui->Iterations);
+	return result;
+}
+
+inline void
+PrettyPrint(UserInput *ui)
+{
+	printf("The average is: %.2f\n", ui->Average);
 }
