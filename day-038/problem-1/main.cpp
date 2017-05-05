@@ -8,11 +8,68 @@
  *
  */
 
-
 #include <stdio.h>
+
+#define global_variable static
+
+global_variable const float Initial_Amount = 1000.0f;
+global_variable const float Interest_Rate = 0.08f;
+global_variable const int Years = 10;
+
+struct Account
+{
+	float Amount;
+	float InterestRate;
+};
+
+inline Account
+CreateAccount(float, float);
+
+inline float
+ComputeAmountWithInterestForYearA(Account *);
+
+inline void
+PrettyPrintA(Account *, int);
 
 int
 main()
 {
+	Account A = CreateAccount(Initial_Amount, Interest_Rate);
+	PrettyPrintA(&A, 0);
+
+	for (int i = 0; i < Years; ++i)
+	{
+		A.Amount = ComputeAmountWithInterestForYearA(&A);
+		PrettyPrintA(&A, (i + 1));
+	}
+
 	return 0;
 }
+
+inline Account
+CreateAccount(float amount, float interestRate)
+{
+	Account A = 
+	{
+		amount,
+		interestRate,
+	};
+
+	return A;
+}
+
+inline float
+ComputeAmountWithInterestForYearA(Account *a)
+{
+	float result = a->Amount;
+	result += (a->Amount * a->InterestRate);
+	return result;
+}
+
+inline void
+PrettyPrintA(Account *a, int year)
+{
+	printf("Year: %d\n", year);
+	printf("Account Amount: %.2f\n\n", a->Amount);
+}
+
