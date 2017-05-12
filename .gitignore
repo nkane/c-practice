@@ -69,3 +69,6 @@ Session.vim
 
 # vim-auto-generated tag files
 tags
+
+# build file
+build/
