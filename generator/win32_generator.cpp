@@ -9,9 +9,9 @@ global_variable const int Buffer_Size = 256;
 global_variable char *BufferString;
 
 void
-ConcatString(char *, char *, char*);
+ConcatString(char *, char *);
 
-void
+void 
 ClearToEmptyString(char *);
 
 int 
@@ -22,7 +22,44 @@ main(int argc, char *argv[])
 		// alloc buffer for strings
 		BufferString = (char *)VirtualAlloc(0, Buffer_Size, (MEM_COMMIT | MEM_RESERVE), PAGE_READWRITE);
 		// file name needs to be day-###
-		ConcatString(BufferString, ".\\day-0\0", argv[1]);
+		ConcatString(BufferString, ".\\day-0\0");
+		ConcatString(BufferString, argv[1]);
+		if (!CreateDirectory(BufferString, NULL))
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
+		
+		// SUCCESS
+		// TODO(nick):
+		// 1) create 3 sub-direction in inside of newly created directory
+		// 2) create build.bat and main.cpp files inside all problem directories
+		//
+
+		// TODO(nick):
+		// 1) repalce last char instead of clearing string
+		ConcatString(BufferString, "\\problem-1");
+		if (!CreateDirectory(BufferString, NULL))
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
+		ClearToEmptyString(BufferString);
+		ConcatString(BufferString, ".\\day-0\0");
+		ConcatString(BufferString, argv[1]);
+		ConcatString(BufferString, "\\problem-2");
+		if (!CreateDirectory(BufferString, NULL))
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
+		ClearToEmptyString(BufferString);
+		ConcatString(BufferString, ".\\day-0\0");
+		ConcatString(BufferString, argv[1]);
+		ConcatString(BufferString, "\\problem-3");
 		if (!CreateDirectory(BufferString, NULL))
 		{
 			// FAILED
@@ -35,33 +72,43 @@ main(int argc, char *argv[])
 		// not enough args passed in 
 	}
 
-	// free buffer for string
+	// free memory for buffer string
 	VirtualFree(BufferString, 0, MEM_RELEASE);
 
 	return 0;
 }
 
 void
-ConcatString(char *bufferString, char *firstString, char *secondString)
+ConcatString(char *bufferString, char *string)
 {
-	// for each character in firstString
+	// for each character in string
 	// add to buffer string
-	char c = *firstString;
-	while (c != '\0')
+	char c;
+	
+	if (string)
 	{
-		*bufferString = c;
-		++bufferString;
-		++firstString;
-		c = *firstString;
-	}
+		// is the bufferstring populated
+		if (*bufferString && *bufferString != ' ')
+		{
+			// keep iterating over the bufferString
+			// util null position is found
+			c = *bufferString;
+			while (c != '\0')
+			{
+				++bufferString;
+				c = *bufferString;
+			}
+		}
 
-	c = *secondString;
-	while (c != '\0')
-	{
-		*bufferString = c;
-		++bufferString;
-		++secondString;
-		c = *secondString;
+		c = *string;
+		while (c != '\0')
+		{
+			*bufferString = c;
+			++bufferString;
+			++string;
+			c = *string;
+		
+		}
 	}
 
 	*bufferString = '\0'; 
@@ -73,7 +120,7 @@ ClearToEmptyString(char *string)
 	char c = *string;
 	while (c != '\0')
 	{
-		c = ' ';
+		*string = ' ';
 		++string;
 		c = *string;
 	}
