@@ -12,8 +12,29 @@
 #include <stdio.h>
 
 int
+FindGCD(int, int);
+
+int
 main()
 {
+	int nOne = 0, nTwo = 0;
+
+	printf("Enter in value one:\n");
+	scanf("%d", &nOne);
+
+	printf("Enter in value two:\n");
+	scanf("%d", &nTwo);
+
+	printf("GDC function Test: %d\n", FindGCD(nOne, nTwo));
+
 	return 0;
+}
+
+int
+FindGCD(int valueOne, int valueTwo)
+{
+	int Result = 0;
+	Result = (valueOne + valueTwo);
+	return (Result);
 }
 
