@@ -4,3 +4,4 @@ pushd .\build
 cl -Od -MTd -Zi -nologo ..\main.cpp
 
 popd
+
