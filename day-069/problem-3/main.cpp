@@ -8,9 +8,30 @@
 
 #include <stdio.h>
 
+void 
+findMax(float *max, float n1, float n2);
+
 int
 main()
 {
+	float max, n1, n2;
+
+	printf("Enter in two values: ");
+	scanf("%f %f", &n1, &n2);
+
+	findMax(&max, n1, n2);
+
+	printf("Max is: %f\n", max);
+
 	return 0;
 }
 
+void 
+findMax(float *max, float n1, float n2)
+{
+	*max = n1;
+	if (n1 < n2) 
+	{
+		*max = n2;
+	}
+}
