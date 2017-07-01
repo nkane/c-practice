@@ -10,8 +10,45 @@
 
 #include <stdio.h>
 
+void
+ComputeYear(int days, int *year, int *month, int *day);
+
 int
 main()
 {
+	int year = 1900, month = 1, day = 1;
+	long int dayInput = 0;
+
+	printf("Enter in the amount of days: ");
+	scanf("%ld", &dayInput);
+	
+	ComputeYear(dayInput, &year, &month, &day);
+
+	printf("Date: %d/%d/%d\n", month, day, year);
+
 	return 0;
 }
+
+void
+ComputeYear(int days, int *year, int *month, int *day)
+{
+	while (days > 0)
+	{
+		if (days >= 365) 
+		{
+			*year += 1;
+			days -= 365;
+		}
+		else if (days >= 30)
+		{
+			*month += 1;
+			days -= 30;
+		}
+		else 
+		{
+			*day += 1;
+			--days;
+		}
+	}
+}
+
