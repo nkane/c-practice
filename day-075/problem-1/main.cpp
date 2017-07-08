@@ -13,9 +13,38 @@
 
 #include <stdio.h>
 
+#define global_variable static
+
+#define array_size(array)(sizeof(array)/sizeof(array[0]))
+
+global_variable const int Size = 2;
+
+global_variable int GlobalQuantity[Size];
+global_variable float GlobalPrice[Size];
+global_variable float GlobalAmount[Size];
+
 int
 main()
 {
+	
+	for (int i = 0; i < array_size(GlobalQuantity); ++i)
+	{
+		printf("Enter in a price for item: ");
+		scanf("%f", &GlobalPrice[i]);
+
+		printf("Enter in a quantity of item: ");
+		scanf("%d", &GlobalQuantity[i]);
+
+		GlobalAmount[i] = ((float)GlobalQuantity[i] * GlobalPrice[i]);	
+	}
+
+	printf("Quantity\tPrice\tAmount\n");
+	printf("--------\t-----\t------\n");
+	for (int i = 0; i < array_size(GlobalQuantity); ++i)
+	{
+		printf("%d\t\t%.2f\t%.2f\n", GlobalQuantity[i], GlobalPrice[i], GlobalAmount[i]);
+	}
+
 	return 0;
 }
 
