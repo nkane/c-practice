@@ -14,5 +14,15 @@
 int
 main()
 {
+	char message1[] = "Input the following data: \0";
+	char message2[] = "------------------------------\0";
+	char message3[] = "Enter the data: \0";
+	char message4[] = "Enter the account number: \0";
+	
+	printf("%s\n", message1);
+	printf("%s\n", message2);
+	printf("%s\n", message3);
+	printf("%s\n", message4);
+
 	return 0;
 }
