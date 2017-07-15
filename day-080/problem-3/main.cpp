@@ -11,9 +11,29 @@
 
 #include <stdio.h>
 
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
+void
+Display(char message[], int length);
+
 int
 main()
 {
+	char message[] = "Vaction is near\0";
+
+	Display(message, len(message));
+	Display(message, 8);
+
 	return 0;
+}
+
+void
+Display(char message[], int length)
+{
+	for (int i = 0; i < length; ++i)
+	{
+		printf("%c", *(message + i));
+	}
+	printf("\n");
 }
 

@@ -12,9 +12,27 @@
 
 #include <stdio.h>
 
+void
+Show(double array[]);
+
 int
 main()
 {
+	double rates[] = { 6.5, 8.2, 8.5, 8.3, 8.6, 9.4, 9.6, 9.8, 10.0, NULL, }; 
+	Show(rates);
+
 	return 0;
+}
+
+void
+Show(double array[])
+{
+	printf("Array: { ");
+	while (*array != NULL)
+	{
+		printf("%.2lf , ", *array);
+		++array;
+	}
+	printf("} \n");
 }
 
