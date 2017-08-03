@@ -14,9 +14,43 @@
 
 #include <stdio.h>
 
+#define global_variable static
+
+global_variable const int Rows = 2;
+global_variable const int Columns = 3;
+
+void
+PrintSumBetween2DArrays(int array1[Rows][Columns], int array2[Rows][Columns]);
+
 int
 main()
 {
+	int First[Rows][Columns] =
+	{
+		{ 16, 18, 23, },
+		{ 54, 91, 11, },
+	};
+	
+	int Second[Rows][Columns] =
+	{
+		{ 24, 52, 77, },
+		{ 16, 19, 59, },
+	};
+
+	PrintSumBetween2DArrays(First, Second);
+
 	return 0;
+}
+
+void
+PrintSumBetween2DArrays(int array1[Rows][Columns], int array2[Rows][Columns])
+{
+	for (int i = 0; i < Rows; ++i)
+	{
+		for (int j = 0; j < Columns; ++j)
+		{
+			printf("Array1[%d]: %d + Array2[%d]: %d = %d\n", i, array1[i][j], j, array2[i][j], (array1[i][j] + array2[i][j]));
+		}
+	}
 }
 
