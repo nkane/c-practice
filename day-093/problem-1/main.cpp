@@ -1,7 +1,7 @@
 /*
  * The selection and bubble sort both use the same technique for swapping
  * list elements. Replace the code in these two functions that performs the
- * swap by a call to a funcito named swap. The prototype for swap should be
+ * swap by a call to a function named swap. The prototype for swap should be
  * void swap(int *, int *). The swap() function should be constructed using
  * the algorithm presented in section 7.4
  *
