@@ -47,18 +47,23 @@ main(int argc, char *argv[])
 		}
 	
 		ConcatString(BufferString, "\\build.bat");
-
-		if (CreateFile(BufferString,
-		           (GENERIC_READ | GENERIC_WRITE),
-			   0,
-			   NULL,
-			   (CREATE_NEW),
-			   (FILE_ATTRIBUTE_NORMAL),
-			   NULL) == INVALID_HANDLE_VALUE)
+		if (CreateFile(BufferString, (GENERIC_READ | GENERIC_WRITE), 0, NULL, (CREATE_NEW), (FILE_ATTRIBUTE_NORMAL), NULL) == INVALID_HANDLE_VALUE)
 		{
 			// FAILED
 			Assert(1 == 0);
 		}
+
+		ClearToEmptyString(BufferString);
+		ConcatString(BufferString, ".\\day-0\0");
+		ConcatString(BufferString, argv[1]);
+		ConcatString(BufferString, "\\problem-1");
+		ConcatString(BufferString, "\\main.cpp");
+		if (CreateFile(BufferString, (GENERIC_READ | GENERIC_WRITE), 0, NULL, (CREATE_NEW), (FILE_ATTRIBUTE_NORMAL), NULL) == INVALID_HANDLE_VALUE)
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
 
 		ClearToEmptyString(BufferString);
 		ConcatString(BufferString, ".\\day-0\0");
@@ -70,11 +75,46 @@ main(int argc, char *argv[])
 			Assert(1 == 0);
 		}
 
+		ConcatString(BufferString, "\\build.bat");
+		if (CreateFile(BufferString, (GENERIC_READ | GENERIC_WRITE), 0, NULL, (CREATE_NEW), (FILE_ATTRIBUTE_NORMAL), NULL) == INVALID_HANDLE_VALUE)
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
+		ClearToEmptyString(BufferString);
+		ConcatString(BufferString, ".\\day-0\0");
+		ConcatString(BufferString, argv[1]);
+		ConcatString(BufferString, "\\problem-2");
+		ConcatString(BufferString, "\\main.cpp");
+		if (CreateFile(BufferString, (GENERIC_READ | GENERIC_WRITE), 0, NULL, (CREATE_NEW), (FILE_ATTRIBUTE_NORMAL), NULL) == INVALID_HANDLE_VALUE)
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
 		ClearToEmptyString(BufferString);
 		ConcatString(BufferString, ".\\day-0\0");
 		ConcatString(BufferString, argv[1]);
 		ConcatString(BufferString, "\\problem-3");
 		if (!CreateDirectory(BufferString, NULL))
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+		ConcatString(BufferString, "\\build.bat");
+		if (CreateFile(BufferString, (GENERIC_READ | GENERIC_WRITE), 0, NULL, (CREATE_NEW), (FILE_ATTRIBUTE_NORMAL), NULL) == INVALID_HANDLE_VALUE)
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
+
+		ClearToEmptyString(BufferString);
+		ConcatString(BufferString, ".\\day-0\0");
+		ConcatString(BufferString, argv[1]);
+		ConcatString(BufferString, "\\problem-3");
+		ConcatString(BufferString, "\\main.cpp");
+		if (CreateFile(BufferString, (GENERIC_READ | GENERIC_WRITE), 0, NULL, (CREATE_NEW), (FILE_ATTRIBUTE_NORMAL), NULL) == INVALID_HANDLE_VALUE)
 		{
 			// FAILED
 			Assert(1 == 0);
