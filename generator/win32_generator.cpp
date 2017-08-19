@@ -45,6 +45,20 @@ main(int argc, char *argv[])
 			// FAILED
 			Assert(1 == 0);
 		}
+	
+		ConcatString(BufferString, "\\build.bat");
+
+		if (CreateFile(BufferString,
+		           (GENERIC_READ | GENERIC_WRITE),
+			   0,
+			   NULL,
+			   (CREATE_NEW),
+			   (FILE_ATTRIBUTE_NORMAL),
+			   NULL) == INVALID_HANDLE_VALUE)
+		{
+			// FAILED
+			Assert(1 == 0);
+		}
 
 		ClearToEmptyString(BufferString);
 		ConcatString(BufferString, ".\\day-0\0");
