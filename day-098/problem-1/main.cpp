@@ -7,9 +7,60 @@
  *
  */
 
+#include <stdio.h>
+
+#define global_variable static
+
+global_variable const int Size = 256;
+
+void
+GetLine(char bufferString[], int size);
+
+void
+AddChar(char newBufferString[], char originalBufferString[], int position);
+
 int
 main()
 {
+	char BufferStringPrimary[Size] = { 0 };
+	char BufferStringSecondary[Size] = { 0 };
+	int i = 0;
+
+	printf("Enter in a string:\n");
+	GetLine(BufferStringPrimary, Size);
+
+	printf("Enter in a string to combined to previous:\n");
+	GetLine(BufferStringSecondary, Size);
+
+	printf("Enter starting position to merge string: ");
+	scanf("%d", &i);
+
+	AddChar(BufferStringSecondary, BufferStringPrimary, i);
+
+	printf("%s", BufferStringPrimary);
+
 	return 0;
+}
+
+
+void
+GetLine(char bufferString[], int size)
+{
+	int i = 0;
+	while (i < (size - 1) && (bufferString[i++] = getchar()) != '\n');
+	bufferString[i] = '\0';
+}
+
+void
+AddChar(char newBufferString[], char originalBufferString[], int position)
+{
+	int i = 0;
+	--position;
+	while (newBufferString[i] != '\0')
+	{
+		originalBufferString[position] = newBufferString[i];
+		++position;
+		++i;
+	}
 }
 
