@@ -7,8 +7,8 @@
  *
  */
 
-#include <stdbool.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,7 +35,7 @@ main()
 
 	if (Separate(StringBuffer, &x, &y, &z))
 	{
-		printf("Valid separate: %6.2f %6.2f %6.2f\n", x, y, z);
+		printf("Valid separate: %f %f %f\n", x, y, z);
 	}
 
 	system("pause");
