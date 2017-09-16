@@ -1,11 +1,11 @@
 /*
- * The Fog Index is an index that can be used to determine the approximate reading gread
- * level of an article. It is determined by measuring both sentence length and the faction
+ * The Fog Index is an index that can be used to determine the approximate reading grade
+ * level of an article. It is determined by measuring both sentence length and the fraction
  * of words with three or more syllables, without taking into account either the article's
  * conceptual difficulty or its clarity. The index is determined using the following steps:
  *
  * 	Step 1: Select a sample of at least 100 words
- * 	Step 2: Count the number of sentences. Any caluse that is separated by a semicolon
+ * 	Step 2: Count the number of sentences. Any clause that is separated by a semicolon
  * 		or colon should be counted as a separated sentence.
  * 	Step 3: Count the number of words containing three or more syllables; but do not
  * 		include words that reach three or more syllables because of either "es" or
@@ -24,10 +24,179 @@
  *
  */
 
+
+// NOTE(nick): didn't complete this syllable checking today - gong to attempt to split syllables tomorrow! :)
+
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
+
+#define Byte(value)(sizeof(uint8_t) * value)
+#define Kilobyte(value)(Byte(1000) * value)
+#define Megabyte(value)(Kilobyte(1000) * value)
+#define Gigabyte(value)(Megabyte(1000) * value)
+
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
+struct FogIndex
+{
+	float Result;
+	int WordCount;
+	int LargeWordCount;
+	int SentenceCount;
+};
+
+void
+ResetFogIndex(struct FogIndex *fogIndex);
+
+void
+ComputeFogIndex(char *stringBuffer, struct FogIndex *outResult);
+
+bool
+IsValidLargeWord(char *stringBuffer, int length);
+
+void
+PrintFogIndex(struct FogIndex *fogIndex, char *fileName);
 
 int
 main()
 {
+	char *fileNames[3] = 
+	{
+		"./data/data-0.txt",
+		"./data/data-1.txt",
+		"./data/data-2.txt",
+	};
+
+	char *stringBuffer = (char *)malloc(Kilobyte(25));
+	memset(stringBuffer, 0, Kilobyte(25));
+
+	struct FogIndex Result;
+	ResetFogIndex(&Result);
+
+	int i = 0;
+	while (len(fileNames) > i)
+	{
+		FILE *currentFile = NULL;
+		if (currentFile = fopen(*(fileNames + i), "r"))
+		{
+			fgets(stringBuffer, Kilobyte(25), currentFile);
+			ComputeFogIndex(stringBuffer, &Result);
+			PrintFogIndex(&Result, *(fileNames + i));
+			fclose(currentFile);
+			ResetFogIndex(&Result);
+			memset(stringBuffer, 0, Kilobyte(25));
+		}
+		else
+		{
+			printf("Error: unable to read file - %s\n", *(fileNames + i));
+		}
+		++i;
+	}
+
+	if (stringBuffer)
+	{
+		free(stringBuffer);
+	}
+
+	system("pause");
+
 	return 0;
 }
+
+void
+ResetFogIndex(struct FogIndex *fogIndex)
+{
+	fogIndex->Result = 0.0f;
+	fogIndex->WordCount = 0;
+	fogIndex->SentenceCount = 0;
+}
+
+void
+ComputeFogIndex(char *stringBuffer, struct FogIndex *outResult)
+{
+	int i = 0;
+	bool inWord = false;
+	char c = *(stringBuffer + i);
+	char tempBuffer[256] = { 0 };
+	int tempBufferCount = 0;
+	while (c != '\0')
+	{
+		switch (c)
+		{
+			case ' ': 
+			{
+				inWord = false;
+				if (IsValidLargeWord(tempBuffer, tempBufferCount))
+				{
+					++outResult->LargeWordCount;
+				}
+				tempBufferCount = 0;
+				memset(tempBuffer, 0, 256);
+			} break;
+
+			case '.':
+			case '?':
+			case ';':
+			case ':':
+			case '!':
+			{
+				++outResult->SentenceCount;
+			} break;
+
+			default: 
+			{
+				if (inWord == false)
+				{
+					inWord = true;
+					++outResult->WordCount;
+				}
+				if (isalpha((int)c) > 0)
+				{
+					*(tempBuffer + tempBufferCount++) = c;
+				}
+			} break;
+		}
+		c = *(stringBuffer + ++i);
+	}
+	outResult->Result = (0.4f * ((outResult->WordCount / outResult->SentenceCount) + 100.0f * (outResult->LargeWordCount / outResult->WordCount)));
+}
+
+// NOTE(nick): need to figure out a way to actually divide word in to syllables instead of 
+// this checking ... will give this a shot tomorrow! :)
+bool
+IsValidLargeWord(char *stringBuffer, int length)
+{
+	bool result = false;
+	if (length >= 3)
+	{
+		if (*(stringBuffer + length - 2) == 'e')
+		{
+			if (*(stringBuffer + (length - 1)) != 'd' &&
+			    *(stringBuffer + (length - 1)) != 's')
+			{
+				result = true;
+			}
+			else if ((length - 2) >= 3)
+			{
+				result = true;
+			}
+		}
+		else
+		{
+			result = true;
+		}
+	}
+	return result;
+}
+
+void
+PrintFogIndex(struct FogIndex *fogIndex, char *fileName)
+{
+	printf("File Name: %s\n", fileName);
+	printf("Word Count: %d\n", fogIndex->WordCount);
+	printf("Large Word Count: %d\n", fogIndex->LargeWordCount);
+	printf("Sentence Count: %d\n", fogIndex->SentenceCount);
+	printf("Fog Index: %6.2f\n\n", fogIndex->Result);
+}
+
