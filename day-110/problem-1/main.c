@@ -24,7 +24,6 @@
  *
  */
 
-
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -52,6 +51,9 @@ ComputeFogIndex(char *stringBuffer, struct FogIndex *outResult);
 
 bool
 IsValidLargeWord(char *stringBuffer, int length);
+
+bool
+isCharVowel(char c);
 
 void
 PrintFogIndex(struct FogIndex *fogIndex, char *fileName);
@@ -125,6 +127,7 @@ ComputeFogIndex(char *stringBuffer, struct FogIndex *outResult)
 			case ' ': 
 			{
 				inWord = false;
+				*(tempBuffer + tempBufferCount) = '\0';
 				if (IsValidLargeWord(tempBuffer, tempBufferCount))
 				{
 					++outResult->LargeWordCount;
@@ -160,28 +163,52 @@ ComputeFogIndex(char *stringBuffer, struct FogIndex *outResult)
 	outResult->Result = (0.4f * ((outResult->WordCount / outResult->SentenceCount) + 100.0f * (outResult->LargeWordCount / outResult->WordCount)));
 }
 
+// NOTE(nick):
+// - 4 letters is the shortest 3 syllable word in the english language
+// - very basic syllable checker, not completely accurate
 bool
 IsValidLargeWord(char *stringBuffer, int length)
 {
 	bool result = false;
-	if (length >= 3)
+	int i = 0;
+	if (length >= 4)
 	{
-		if (*(stringBuffer + length - 2) == 'e')
+		int j = 0;
+		while (*(stringBuffer + j) != '\0')
 		{
-			if (*(stringBuffer + (length - 1)) != 'd' &&
-			    *(stringBuffer + (length - 1)) != 's')
+			if (isCharVowel(*(stringBuffer + j)))
 			{
-				result = true;
+				++i;
+				if (i >= 3)
+				{
+					result = true;
+					break;
+				}
 			}
-			else if ((length - 2) >= 3)
-			{
-				result = true;
-			}
+			++j;
 		}
-		else
+	}
+	return result;
+}
+
+bool
+isCharVowel(char c)
+{
+	bool result = false;
+	switch (tolower(c))
+	{
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
 		{
 			result = true;
-		}
+		} break;
+		default:
+		{
+			// NOTE(nick): do nothing
+		} break;
 	}
 	return result;
 }
