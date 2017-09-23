@@ -1,0 +1,3 @@
+This is some text that is for test data that should be read to
+stdout. More text for testing.
+Another sentence on a different line.
