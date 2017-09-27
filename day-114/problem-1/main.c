@@ -24,9 +24,100 @@
  *
  */
 
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct _record
+{
+	char *Name;
+	char *Code;
+	int ID;
+	float Rate;
+	char *Date;
+} Record;
+
+FILE *
+OpenEmployeeFile();
+
+void 
+FCopy(FILE *file, char *newFileName);
+
 int
 main()
 {
+	FILE *employeeFile = NULL;
+	char stringBuffer[256] = { 0 };
+	char *employeeFileName = "employee";
+	char inputValue = ' ';
+	employeeFile = OpenEmployeeFile("r");
+
+	printf("Enter in custom name? (y/n)");
+	scanf("\n%c", &inputValue);
+
+	if (tolower(inputValue) == 'y')
+	{
+		printf("Enter in name: ");
+		gets(stringBuffer);
+		FCopy(employeeFile, stringBuffer);
+	}
+	else
+	{
+		FCopy(employeeFile, employeeFileName);
+	}
+
+	if (employeeFile)
+	{
+		fclose(employeeFile);
+	}
+
 	return 0;
+}
+
+FILE *
+OpenEmployeeFile(char *filePermissions)
+{
+	const char *fileLocation = "./data/employee.dat";
+	FILE *result = fopen(fileLocation, filePermissions);
+	if (result == NULL)
+	{
+		printf("ERROR: cannot open file %s\n", fileLocation);
+	}
+	return (result);
+}
+
+void 
+FCopy(FILE *file, char *newFileName)
+{
+	char stringBuffer[256] = { 0 };
+	const char *backupFileLocation = "./data/";
+	strcat(stringBuffer, backupFileLocation);
+	strcat(stringBuffer, newFileName);
+
+	char timeBuffer[26] = { 0 };
+	time_t rawTime;
+	struct tm *timeInfo;
+	time(&rawTime);
+	timeInfo = localtime(&rawTime);
+	sprintf(timeBuffer, "-%d-%d-%d-%d-%d-%d", (timeInfo->tm_year + 1990), timeInfo->tm_mon, timeInfo->tm_mday, timeInfo->tm_hour, timeInfo->tm_min, timeInfo->tm_sec);
+	strcat(stringBuffer, timeBuffer);
+	strcat(stringBuffer, ".bak");
+	
+	FILE *newFile = fopen(stringBuffer, "a+");
+
+	if (newFile)
+	{
+		char lineBuffer[256];
+		// TODO(nick): finish this up ...
+		while (fgets(lineBuffer, 256, file) != NULL)
+		{
+			fputs(lineBuffer, newFile);
+		}
+		fclose(newFile);
+	}
+	else
+	{
+		printf("ERROR: failed to create file %s\n", stringBuffer);
+	}
 }
 
