@@ -3,5 +3,7 @@ pushd .\build
 
 cl -Od -MTd -Zi -nologo ..\main.c
 
+xcopy /Q /E /I /Y ..\data .\data
+
 popd
 
