@@ -9,11 +9,6 @@
  *
  */
 
-
-// NOTE(nick):
-// - problem incompleted for day 124!
-// - ran out of time! will completed remaining problem in day 125
-
 #include <stdlib.h>
 #include <stdio.h>
 
