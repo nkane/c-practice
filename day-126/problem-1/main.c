@@ -8,7 +8,7 @@
  * and counts between 40 and 50 adversely affect more than 60 percent of all
  * hay fever sufferers.
  * 
- * Write a C program tha updates a file containing the 10 most recent pollen counts.
+ * Write a C program that updates a file containing the 10 most recent pollen counts.
  * Add each new count to the end of the file. As you add a new count to the end of
  * the file, delete the oldest count, which is the first value in the file. Your
  * program should also calculate and display the averages of the data for the old
@@ -38,10 +38,95 @@
  *
  */
 
+#include <stdlib.h>
 #include <stdio.h>
+
+FILE *
+OpenDataFile();
+
+void
+ReadCurrentValues(FILE *dataFile, int outData[10]);
+
+void
+InputData(FILE *dataFile, int rawData[10]);
+
+float
+ComputeDataAverage(int rawData[10]);
 
 int
 main()
 {
-	return 0;
+    FILE *pollenData = OpenDataFile();
+    if (pollenData)
+    {
+        int rawData[10] = { 0 };
+        char c;
+	float currentAverage = 0.0f;
+        ReadCurrentValues(pollenData, rawData);
+        do {
+            printf("Write new data?\n");
+	    scanf(" %c", &c);
+	    c = tolower(c);
+            if (c == 'y')
+            {
+                InputData(pollenData, rawData);
+            }
+	    currentAverage = ComputeDataAverage(rawData);
+	    printf("Current Average: %6.2f\n", currentAverage);
+        } while (c == 'y');
+        fclose(pollenData);
+    }
+    system("pause");
+    return 0;
+}
+
+FILE *
+OpenDataFile()
+{
+    FILE *dataFile = NULL;
+    dataFile = fopen("./data/pollen.dat", "r+");
+    return dataFile;
+}
+
+void
+ReadCurrentValues(FILE *dataFile, int outData[10])
+{
+    int i = 0;
+    while (fscanf(dataFile, "%d\n", &outData[i]) != EOF && i < 10)
+    {
+        ++i;
+    }
+}
+
+void
+InputData(FILE *dataFile, int rawData[10])
+{
+	int inputData = 0;
+	printf("Enter new pollen count: ");
+	scanf("%d", &inputData);
+	int i;
+	for (i = 1; i < 10; ++i)
+	{
+		rawData[i - 1] = rawData[i];
+	}
+	rawData[--i] = inputData;
+	fseek(dataFile, 0, SEEK_SET);
+	i = 0;
+	while (i < 10) 
+	{
+		fprintf(dataFile, "%d\n", rawData[i++]);
+	}
+}
+
+float
+ComputeDataAverage(int rawData[10])
+{
+	float average = 0;
+	int i;
+	for (i = 0; i < 10; ++i)
+	{
+		average += rawData[i];
+	}
+	average /= 10.0f;
+	return average;
 }

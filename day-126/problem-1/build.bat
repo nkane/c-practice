@@ -1,6 +1,8 @@
-IF NOT .\build mkdir .\build
-pushd .\build
+IF NOT EXIST ..\build MKDIR .\build
+PUSHD .\build
 
 cl /Od /MTd /Zi /nologo ..\main.c
 
-popd
+XCOPY /Y /I /Q /S ..\data .\data
+
+POPD
