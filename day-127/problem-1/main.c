@@ -1,7 +1,7 @@
 /*
  * Pollen count readings, which are taken from August through September in the 
- * northeastern region of the United States, measure the number of ragweed pollen
- * grains in the air. Pollen countds in the range of 10 to 200 grains per cubic
+ * north eastern region of the United States, measure the number of ragweed pollen
+ * grains in the air. Pollen counts in the range of 10 to 200 grains per cubic
  * meter of air are typical during this time of year. Pollen counts above 10 begin
  * to affect a small percentage of hay fever sufferers, counts in the range of 30
  * to 40 will noticeably bother approximately 30 percent of hay fever suffers,
@@ -40,9 +40,13 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 FILE *
 OpenDataFile();
+
+void
+ProcessPollenData(FILE *dataFile);
 
 void
 ReadCurrentValues(FILE *dataFile, int outData[10]);
@@ -56,46 +60,71 @@ ComputeDataAverage(int rawData[10]);
 int
 main()
 {
-    FILE *pollenData = OpenDataFile();
-    if (pollenData)
-    {
-        int rawData[10] = { 0 };
-        char c;
-	float currentAverage = 0.0f;
-        ReadCurrentValues(pollenData, rawData);
-        do {
-            printf("Write new data?\n");
-	    scanf(" %c", &c);
-	    c = tolower(c);
-            if (c == 'y')
-            {
-                InputData(pollenData, rawData);
-            }
-	    currentAverage = ComputeDataAverage(rawData);
-	    printf("Current Average: %6.2f\n", currentAverage);
-        } while (c == 'y');
-        fclose(pollenData);
-    }
-    system("pause");
-    return 0;
+	FILE *pollenData = OpenDataFile();
+	if (pollenData)
+	{
+		ProcessPollenData(pollenData);
+		fclose(pollenData);
+	}
+	system("pause");
+	return 0;
 }
 
 FILE *
 OpenDataFile()
 {
-    FILE *dataFile = NULL;
-    dataFile = fopen("./data/pollen.dat", "r+");
-    return dataFile;
+	FILE *dataFile = NULL;
+	char basePath[] = "./data/";
+	char stringBuffer[32] = { 0 };
+	char fullPath[128] = { 0 };
+	strcpy(fullPath, basePath);
+	printf("Enter in the name of the data file: ");
+	gets(stringBuffer);
+	if (strlen(stringBuffer) == 0)
+	{
+		strcpy(stringBuffer, "temp");
+	}
+	strcat(fullPath, stringBuffer);
+	strcat(fullPath, ".dat");
+	dataFile = fopen(fullPath, "r+");
+	if (dataFile == NULL) 
+	{
+		dataFile = fopen(fullPath, "w");
+		fclose(dataFile);
+		dataFile = fopen(fullPath, "r+");
+	}
+	return dataFile;
+}
+
+void
+ProcessPollenData(FILE *dataFile)
+{
+	int rawData[10] = { 0 };
+	char c;
+	float currentAverage = 0.0f;
+	printf("This program reads in pollen data from a file for the last 10 days;\nadditionally, overwriting data from the earliest day(s) is allowed.\n");
+	ReadCurrentValues(dataFile, rawData);
+	do {
+	    printf("Write new data?\n");
+	    scanf(" %c", &c);
+	    c = tolower(c);
+	    if (c == 'y')
+	    {
+		InputData(dataFile, rawData);
+	    }
+	    currentAverage = ComputeDataAverage(rawData);
+	    printf("Current Pollen Average: %6.2f\n", currentAverage);
+	} while (c == 'y');
 }
 
 void
 ReadCurrentValues(FILE *dataFile, int outData[10])
 {
-    int i = 0;
-    while (fscanf(dataFile, "%d\n", &outData[i]) != EOF && i < 10)
-    {
-        ++i;
-    }
+	int i = 0;
+	while (fscanf(dataFile, "%d\n", &outData[i]) != EOF && i < 10)
+	{
+		++i;
+	}
 }
 
 void
