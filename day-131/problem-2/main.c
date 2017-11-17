@@ -8,8 +8,21 @@
 
 #include <stdio.h>
 
+#define local_persist static
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
 int
 main()
 {
+	local_persist float rates[] = { 12.9f, 19.6f, 11.4f, 13.7f, 9.5f, 15.2f, 17.6f, };
+	int i;
+
+	printf("Rates (using pointer notation):\n");
+
+	for (i = 0; i < len(rates); ++i)
+	{
+		printf("%6.2f\n", *(rates + i));
+	}
+	
 	return 0;
 }

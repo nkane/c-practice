@@ -9,9 +9,25 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 int
 main()
 {
+	char *stringBuffer = "This is a sample";
+	int i;
+
+	for (i = 0; i < strlen(stringBuffer); ++i)
+	{
+		printf("%c", *(stringBuffer + i));
+	}
+
+	printf("\n");
+
+	for (i = 10; i < strlen(stringBuffer); ++i)
+	{
+		printf("%c", *(stringBuffer + i));
+	}
+
 	return 0;
 }
