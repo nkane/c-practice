@@ -7,8 +7,26 @@
 
 #include <stdio.h>
 
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
 int
 main()
 {
+	char message[] = "This is a test.";
+	char tempMessage[16] = { 0 };
+	char *srcPtr, *destPtr;
+
+	for (srcPtr = message, destPtr = tempMessage; srcPtr < (message + len(message)); srcPtr++, destPtr++)
+	{
+		*destPtr = *srcPtr;
+	}
+	++destPtr;
+	*destPtr = '\0';
+
+	for (srcPtr = tempMessage; srcPtr < (tempMessage + len(tempMessage)); srcPtr++)
+	{
+		printf("%c", *srcPtr);
+	}
+
 	return 0;
 }
