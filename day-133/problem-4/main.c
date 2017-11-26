@@ -15,8 +15,45 @@
 
 #include <stdio.h>
 
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
+void
+Extend(double *price, double *quantity, double *amount, int size);
+
+void
+Display(double *amount, int size);
+
 int
 main()
 {
+	double price[10] = { 10.62, 14.89, 13.21, 16.55, 19.62, 9.47, 6.58, 19.32, 12.15, 3.99, };
+	double quantity[10] = { 4.0, 9.5, 6.0, 7.35, 9.0, 15.3, 3.0, 5.4, 2.9, 4.9, };
+	double amount[10] = { 0.0 };
+
+	Extend(price, quantity, amount, len(price));
+	Display(amount, len(amount));
+
 	return 0;
 }
+
+void
+Extend(double *price, double *quantity, double *amount, int size)
+{
+	int i;
+	for (i = 0; i < size; ++i)
+	{
+		*(amount + i) = (*(price + i)) * (*(quantity + i));
+	}
+}
+
+void
+Display(double *amount, int size)
+{
+	int i;
+	printf("Amounts: ");
+	for (i = 0; i < size; ++i)
+	{
+		printf(" %6.2lf, ", *(amount + i));
+	}
+}
+

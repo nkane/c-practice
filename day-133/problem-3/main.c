@@ -11,8 +11,42 @@
 
 #include <stdio.h>
 
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
+void
+Display(char *string, int size);
+
+void
+DisplayAlter(char *string);
+
 int
 main()
 {
+	char message[] = "Vacation is near";
+
+	Display(message, len(message));
+	DisplayAlter(message);
+
 	return 0;
+}
+
+void
+Display(char *string, int size)
+{
+	int i;
+	for (i = 0; i < size; ++i)
+	{
+		printf("%c", *(string + i));
+	}
+	printf("\n");
+}
+
+void
+DisplayAlter(char *string)
+{
+	while (*string != '\0')
+	{
+		printf("%c", *string++);
+	}
+	printf("\n");
 }
