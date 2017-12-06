@@ -21,11 +21,17 @@
 #include <stdio.h>
 
 void
-Vowels(char string[]);
+Vowels(char *string);
 
 int
 main()
 {
+    char stringBuffer[256] = { 0 };
+    printf("Enter in a string: ");
+    gets(stringBuffer);
+    printf("Vowels print out:\n");
+    Vowels(stringBuffer);
+
 	return 0;
 }
 
@@ -34,8 +40,7 @@ Vowels(char string[])
 {
 	int i = 0;
 	char c;
-
-	while ((c = string[i++]) != '\0')
+	while ((c = *(string + i)) != '\0')
 	{
 		switch (c)
 		{
@@ -45,7 +50,8 @@ Vowels(char string[])
 			case 'o':
 			case 'u':
 				putchar(c);
+        		putchar('\n');
 		}
-		putchar('\n');
+        ++i;
 	}
 }

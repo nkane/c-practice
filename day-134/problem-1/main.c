@@ -18,14 +18,23 @@
 #include <stdio.h>
 
 char
-ToUppert(char c);
+ToUpper(char c);
 
 void
-Convert(char string[]);
+Convert(char *string);
 
 int
 main()
 {
+    char stringBuffer[256] = { 0 };
+
+    printf("Enter in a string: ");
+    gets(stringBuffer);
+
+    Convert(stringBuffer);
+
+    printf("Output: %s", stringBuffer);
+
 	return 0;
 }
 
@@ -35,20 +44,22 @@ Convert(char string[])
 	int i = 0;
 	while (string[i] != '\0')
 	{
-		string[i] = toUpper(string[i]);
+        char *c = (string + i);
+        *c = ToUpper(*c);
+		string[i] = ToUpper(string[i]);
 		++i;
 	}
 }
 
 char
-ToUpper(char letter)
+ToUpper(char c)
 {
-	if (letter >= 'a' && letter <= 'z')
+	if (c >= 'a' && c <= 'z')
 	{
-		return (letter - 'a' + 'A');
+		return (c - 'a' + 'A');
 	}
 	else
 	{
-		return (letter);
+		return (c);
 	}
 }
