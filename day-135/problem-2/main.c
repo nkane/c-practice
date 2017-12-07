@@ -10,8 +10,30 @@
 
 #include <stdio.h>
 
+#define SIZE 13
+
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
 int
 main()
 {
+    float rates[SIZE] = { 6.25f, 6.50f, 6.8f, 7.2f, 7.35f, 7.5f, 7.65f, 7.8f, 9.2f, 9.4f, 9.6f, 9.8f, 9.0f, };
+    float *dispPtr = NULL;
+
+    printf("for loop\n");
+    for (dispPtr = rates; dispPtr < (rates + len(rates)); dispPtr++)
+    {
+        printf("%6.2f, ", *dispPtr);
+    }
+    printf("\n");
+
+    dispPtr = rates;
+    printf("while loop\n");
+    while (dispPtr < (rates + len(rates)))
+    {
+        printf("%6.2f, ", *dispPtr++);
+    }
+    printf("\n");
+
     return 0;
 }

@@ -13,8 +13,36 @@
 
 #include <stdio.h>
 
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
 int
 main()
 {
+    char stringBuffer[] = "Hooray for All of Us";
+    char *messagePtr = NULL;
+
+    printf("for statement:\n");
+    for (messagePtr = stringBuffer;
+         messagePtr < (stringBuffer + len(stringBuffer));
+         messagePtr++)
+    {
+        printf("%c", *messagePtr);
+    }
+
+    printf("\nwhile statement:\n");
+    messagePtr = stringBuffer;
+    while (messagePtr < (stringBuffer + len(stringBuffer)))
+    {
+        printf("%c", *messagePtr++);
+    }
+
+    printf("\nSet to all:\n");
+    // set to beginning of "All"
+    messagePtr = (stringBuffer + 11);
+    while (messagePtr < (stringBuffer + len(stringBuffer)))
+    {
+        printf("%c", *messagePtr++);
+    }
+
     return 0;
 }
