@@ -22,8 +22,70 @@
 
 #include <stdio.h>
 
+#define len(array)(sizeof(array)/sizeof(array[0]))
+
+typedef struct _employee
+{
+    int id;
+    char name[20];
+    float payRate;
+    float hoursWorked;
+    float grossPay;
+} Employee;
+
+Employee
+GetEmployeeInfo();
+
+void
+PrintEmployeeReport(Employee *e, int size);
+
 int
 main()
 {
+    Employee data[6] = { 0 };
+    int i;
+
+    for (i = 0; i < len(data) - 5; ++i)
+    {
+        *(data + i) =  GetEmployeeInfo();
+    }
+
+    PrintEmployeeReport(data, len(data));
+
     return 0;
 }
+
+Employee
+GetEmployeeInfo()
+{
+    Employee result = { 0 };
+
+    printf("id: ");
+    scanf("%d", &result.id);
+
+    printf("name: ");
+    scanf("%s", &result.name);
+
+    printf("pay rate: ");
+    scanf("%f", &result.payRate);
+
+    printf("hours worked: ");
+    scanf("%f", &result.hoursWorked);
+
+    result.grossPay = (result.payRate * result.hoursWorked);
+
+    return result;
+}
+
+void
+PrintEmployeeReport(Employee *e, int size)
+{
+    int i;
+    printf("===================================\n");
+    for (i = 0; i < size; ++i)
+    {
+        printf("id : %d\nname: %s\npay rate: %6.2f\nhours worked; %6.2f\ngross pay: %6.2f\n===================================\n",
+                (e + i)->id, (e + i)->name, (e + i)->payRate, (e + i)->hoursWorked, (e + i)->grossPay);
+    }
+}
+
