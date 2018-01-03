@@ -16,7 +16,7 @@ ListNode *
 NewNode(int value);
 
 void
-Insert(ListNode *head, int value);
+Insert(ListNode **head, int value);
 
 void
 PrintNodes(ListNode *head);
@@ -28,16 +28,18 @@ int
 main()
 {
     ListNode *head = NULL;
-    head = NewNode(0);
+    //head = NewNode(0);
 
-    for (int i = 1; i < 10; ++i)
+    for (int i = 0; i < 10; ++i)
     {
-        Insert(head, i);
+        Insert(&head, i);
     }
 
     PrintNodes(head);
 
     RemoveAll(head);
+
+    system("pause");
 
     return 0;
 }
@@ -52,12 +54,12 @@ NewNode(int value)
 }
 
 void
-Insert(ListNode *head, int value)
+Insert(ListNode **head, int value)
 {
-    if (head)
+    if (*head)
     {
         // find the last node in the list
-        ListNode *currentNode = head;
+        ListNode *currentNode = *head;
         while (currentNode->next)
         {
             currentNode = currentNode->next;
@@ -67,7 +69,7 @@ Insert(ListNode *head, int value)
     }
     else
     {
-        head = NewNode(value);
+        *head = NewNode(value);
     }
 }
 
@@ -91,7 +93,7 @@ RemoveAll(ListNode *head)
     if (head)
     {
         ListNode *currentNode = head->next;
-        while (currentNode || head)
+        while (head)
         {
             free(head);
             head = currentNode;
