@@ -1,0 +1,8 @@
+Debug Tatics
+
+1. You can't debug code by just looking at it.
+2. Repeat the bug with an automated test.
+3. Run the program under a debugger and valgrind and lint.
+4. Find the backtrace and print out all of the variables on the path.
+5. Once you fix it, add macro check() from "dbg.h" to prevent it.
+6. Enable core dump files on system, and for specific program.
