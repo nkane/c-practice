@@ -1,7 +1,7 @@
 #ifndef lcthw_List_algos_h
 #define lcthw_List_algos_h
 
-#include <string.h>
+#include <lcthw/list.h>
 
 typedef int (*List_compare)(const char *s1, const char *s2);
 

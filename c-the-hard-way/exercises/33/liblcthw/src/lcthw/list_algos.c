@@ -1,6 +1,6 @@
-#include <lcthw/list.h>
 #include <lcthw/list_algos.h>
 #include <lcthw/dbg.h>
+#include <string.h>
 
 int
 List_bubble_sort(List *list, List_compare list_compare_function)

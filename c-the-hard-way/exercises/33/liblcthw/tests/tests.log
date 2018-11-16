@@ -1,13 +1,8 @@
-DEBUG tests/list_tests.c:117: ----- RUNNING: ./tests/list_tests
-DEBUG tests/list_tests.c:107: 
------ test_create
-DEBUG tests/list_tests.c:108: 
------ test_push_pop
-DEBUG tests/list_tests.c:109: 
------ test_unshift
-DEBUG tests/list_tests.c:110: 
------ test_remove
-DEBUG tests/list_tests.c:111: 
------ test_shift
-DEBUG tests/list_tests.c:112: 
------ test_destroy
+DEBUG tests/list_algos_tests.c:91: ----- RUNNING: ./tests/list_algos_tests
+DEBUG tests/list_algos_tests.c:86: 
+----- test_bubble_sort
+[ERROR] (tests/list_algos_tests.c:43: errno: None) Bubble sort failed.
+DEBUG tests/list_algos_tests.c:91: ----- RUNNING: ./tests/list_algos_tests
+DEBUG tests/list_algos_tests.c:86: 
+----- test_bubble_sort
+[ERROR] (tests/list_algos_tests.c:43: errno: None) Bubble sort failed.
