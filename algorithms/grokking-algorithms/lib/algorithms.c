@@ -11,6 +11,8 @@
 #define global_variable
 
 #define time_delta(t1, t2)((double)(t1 - t2)/CLOCKS_PER_SEC)
+#define print_time(t)\
+	printf("Time: %f seconds\n", t)\
 
 global_variable clock_t Start_Time;
 global_variable clock_t End_Time;
@@ -41,8 +43,39 @@ Linear_Search_Int(int *buffer, int size, int search)
 		}
 	}
 	End_Time = clock();
-	Spent_Time = time_delta(End_Time,Start_Time);
-	printf("Time: %f seconds\n", Spent_Time);
+	Spent_Time = time_delta(End_Time, Start_Time);
+	print_time(Spent_Time);
+	return found;
+}
+
+int
+Binary_Search_Int(int *buffer, int size, int search)
+{
+	Start_Time = clock();
+	int found = 0;
+	int min = 0;
+	int max = size;
+	int mid = 0;
+	while (min != size)
+	{
+		mid = ((min + max) / 2);
+		if (mid == search)
+		{
+			found = 1;
+			break;
+		}
+		else if (search > mid)
+		{
+			min = mid;
+		}
+		else if (search < mid)
+		{
+			max = mid;
+		}
+	}
+	End_Time = clock();
+	Spent_Time = time_delta(End_Time, Start_Time);
+	print_time(Spent_Time);
 	return found;
 }
 
