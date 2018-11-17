@@ -42,7 +42,7 @@ Linear_Search_Int(int *buffer, int size, int search)
 	}
 	End_Time = clock();
 	Spent_Time = time_delta(End_Time,Start_Time);
-	printf("Time: %f\n", Spent_Time);
+	printf("Time: %f seconds\n", Spent_Time);
 	return found;
 }
 
