@@ -38,10 +38,13 @@ test_bubble_sort()
 {
 	List *words = create_words();
 
-	List_Print(words);
+	List_Print(words, "Before Bubble Sort");
 
 	// should work on a list that needs sorting
 	int rc = List_bubble_sort(words, (List_compare) strcmp);
+
+	List_Print(words, "After Bubble Sort");
+
 	mu_assert(rc == 0, "Bubble sort failed.");
 	mu_assert(is_sorted(words), "Words are not sorted after bubble sort.");
 

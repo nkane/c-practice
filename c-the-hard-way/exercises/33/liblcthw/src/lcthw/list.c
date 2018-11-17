@@ -134,9 +134,10 @@ error:
 }
 
 void
-List_Print(List * list)
+List_Print(List * list, const char *message)
 {
 	check(list, "List is NULL");
+	log_info("%s", message);
 	LIST_FOREACH(list, first, next, current)
 	{
 		log_info("Node [%p] - value: %s -- prev [%p] <- * -> next [%p]", current, (char *)current->value, current->prev, current->next);

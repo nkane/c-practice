@@ -51,7 +51,7 @@ void *
 List_Remove(List * list, ListNode * node);
 
 void
-List_Print(List * list);
+List_Print(List * list, const char *);
 
 #define LIST_FOREACH(L, S, M, V) ListNode *_node = NULL;\
 												   ListNode *V = NULL;\
