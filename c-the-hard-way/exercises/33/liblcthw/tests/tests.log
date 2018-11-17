@@ -1,0 +1,34 @@
+[DEBUG] tests/list_algos_tests.c:96: ----- RUNNING: ./tests/list_algos_tests
+[DEBUG] tests/list_algos_tests.c:91: 
+----- test_bubble_sort
+[INFO] (src/lcthw/list.c:140) Before Bubble Sort
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9018] - value: XXXX -- prev [(nil)] <- * -> next [0x1cc9028]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9028] - value: 1234 -- prev [0x1cc9018] <- * -> next [0x1cc9038]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9038] - value: abcd -- prev [0x1cc9028] <- * -> next [0x1cc9048]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9048] - value: xjvef -- prev [0x1cc9038] <- * -> next [0x1cc9058]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9058] - value: NDSS -- prev [0x1cc9048] <- * -> next [(nil)]
+[INFO] (src/lcthw/list.c:140) After Bubble Sort
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9018] - value: 1234 -- prev [(nil)] <- * -> next [0x1cc9028]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9028] - value: NDSS -- prev [0x1cc9018] <- * -> next [0x1cc9038]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9038] - value: XXXX -- prev [0x1cc9028] <- * -> next [0x1cc9048]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9048] - value: abcd -- prev [0x1cc9038] <- * -> next [0x1cc9058]
+[INFO] (src/lcthw/list.c:143) Node [0x1cc9058] - value: xjvef -- prev [0x1cc9048] <- * -> next [(nil)]
+[ERROR] (tests/list_algos_tests.c:61: errno: None) Bubble sort failed on empty list.
+[DEBUG] tests/list_algos_tests.c:96: ----- RUNNING: ./tests/list_algos_tests
+[DEBUG] tests/list_algos_tests.c:91: 
+----- test_bubble_sort
+[INFO] (src/lcthw/list.c:140) Before Bubble Sort
+[INFO] (src/lcthw/list.c:143) Node [0x10fd018] - value: XXXX -- prev [(nil)] <- * -> next [0x10fd028]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd028] - value: 1234 -- prev [0x10fd018] <- * -> next [0x10fd038]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd038] - value: abcd -- prev [0x10fd028] <- * -> next [0x10fd048]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd048] - value: xjvef -- prev [0x10fd038] <- * -> next [0x10fd058]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd058] - value: NDSS -- prev [0x10fd048] <- * -> next [(nil)]
+[INFO] (src/lcthw/list.c:140) After Bubble Sort
+[INFO] (src/lcthw/list.c:143) Node [0x10fd018] - value: 1234 -- prev [(nil)] <- * -> next [0x10fd028]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd028] - value: NDSS -- prev [0x10fd018] <- * -> next [0x10fd038]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd038] - value: XXXX -- prev [0x10fd028] <- * -> next [0x10fd048]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd048] - value: abcd -- prev [0x10fd038] <- * -> next [0x10fd058]
+[INFO] (src/lcthw/list.c:143) Node [0x10fd058] - value: xjvef -- prev [0x10fd048] <- * -> next [(nil)]
+[DEBUG] tests/list_algos_tests.c:92: 
+----- test_merge_sort
+Segmentation fault

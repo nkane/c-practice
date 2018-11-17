@@ -1,8 +1,7 @@
 #include <lcthw/list_algos.h>
 #include <lcthw/dbg.h>
-#include <string.h>
 
-void
+inline void
 ListNode_Swap(ListNode *n1, ListNode *n2)
 {
 	void *temp = n1->value;
@@ -11,37 +10,35 @@ ListNode_Swap(ListNode *n1, ListNode *n2)
 }
 
 int
-List_bubble_sort(List *list, List_compare list_compare_function)
+List_Bubble_Sort(List *list, List_compare list_compare_function)
 {
-	int result = -1;
-	if (list && list_compare_function)
+	int sorted = 1;
+	if (List_Count(list) <= 1)
 	{
-		ListNode *node_one = list->first;
-		ListNode *node_two = node_one->next; 
-		int i;
-		int j;
-		for (i = 0; i < list->count; i++)
-		{
-			node_one = list->first;
-			node_two = node_one->next;
-			for (j = 0; j < list->count - i - 1; j++)
-			{
-				// check if node_one value is greater than node_two value
-				if (list_compare_function(node_one, node_two) == 1)
-				{
-					ListNode_Swap(node_one, node_two);
-				}
-				node_one = node_two;
-				node_two = node_one->next;
-			}
-		}
-		result = 0;
+		return 0;
 	}
-	return result;
+	else
+	{
+		do {
+			sorted = 1;
+			LIST_FOREACH(list, first, next, current)
+			{
+				if (current->next)
+				{
+					if (list_compare_function(current->value, current->next->value) > 0)
+					{
+						ListNode_Swap(current, current->next);
+						sorted = 0;
+					}
+				}
+			}
+		} while (!sorted);
+	}
+	return 0;
 }
 
 List *
-List_merge_sort(List *list, List_compare list_compare_function)
+List_Merge_Sort(List *list, List_compare list_compare_function)
 {
 	if (list && list_compare_function)
 	{
