@@ -132,3 +132,15 @@ List_Remove(List * list, ListNode * node)
 error:
 	return result;
 }
+
+void
+List_Print(List * list)
+{
+	check(list, "List is NULL");
+	LIST_FOREACH(list, first, next, current)
+	{
+		log_info("Node [%p] - value: %s -- prev [%p] <- * -> next [%p]", current, current->value, current->prev, current->next);
+	} 
+error:
+	return;
+}

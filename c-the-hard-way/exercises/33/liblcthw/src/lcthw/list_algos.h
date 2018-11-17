@@ -3,7 +3,7 @@
 
 #include <lcthw/list.h>
 
-typedef int (*List_compare)(const char *s1, const char *s2);
+typedef int (*List_compare)(const void *s1, const void *s2);
 
 int
 List_bubble_sort(List *list, List_compare list_compare_function);

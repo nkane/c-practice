@@ -1,8 +1,0 @@
-DEBUG tests/list_algos_tests.c:91: ----- RUNNING: ./tests/list_algos_tests
-DEBUG tests/list_algos_tests.c:86: 
------ test_bubble_sort
-[ERROR] (tests/list_algos_tests.c:43: errno: None) Bubble sort failed.
-DEBUG tests/list_algos_tests.c:91: ----- RUNNING: ./tests/list_algos_tests
-DEBUG tests/list_algos_tests.c:86: 
------ test_bubble_sort
-[ERROR] (tests/list_algos_tests.c:43: errno: None) Bubble sort failed.
