@@ -139,7 +139,7 @@ List_Print(List * list)
 	check(list, "List is NULL");
 	LIST_FOREACH(list, first, next, current)
 	{
-		log_info("Node [%p] - value: %s -- prev [%p] <- * -> next [%p]", current, current->value, current->prev, current->next);
+		log_info("Node [%p] - value: %s -- prev [%p] <- * -> next [%p]", current, (char *)current->value, current->prev, current->next);
 	} 
 error:
 	return;
