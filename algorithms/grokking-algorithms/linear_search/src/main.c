@@ -3,8 +3,8 @@
 #include <lib/algorithms.c>
 #include <assert.h>
 
-#define SIZE 100
-#define FIND  99
+#define SIZE 128
+#define FIND  64
 
 int
 main()
