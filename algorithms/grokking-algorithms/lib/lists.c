@@ -70,18 +70,50 @@ List_Add(List *list, void *value)
 }
 
 void
-List_Remove()
+List_Remove(List *list, int element)
 {
-	// TODO(nick):
+	if (element < list->count && element >= 0)
+	{
+		Node *current_node = list->first;
+		int i;
+		for (i = 0; i < element && current_node; i++)
+		{
+			current_node = current_node->next;
+		}
+		Node *previous_node = current_node->previous;
+		Node *next_node = current_node->next;
+		if (previous_node == NULL)
+		{
+			// checks if it is beginning of list
+			list->first = next_node;
+			list->first->previous = NULL;
+		}
+		else if (next_node == NULL)
+		{
+			// checks if it is end of list
+			list->last = previous_node;
+			list->last->next = NULL;
+		}
+		else
+		{
+			previous_node->next = next_node;
+			next_node->previous = previous_node;
+		}
+		free(current_node);
+		list->count--;
+	}
 }
 
 void
 List_Print(List *l)
 {
 	Node *current_node = l->first;
+	printf(" ---- Beginning of List ---- \n");
+	printf(" ---- List Count: %3d   ---- \n", l->count);
 	while (current_node != NULL)
 	{
 		printf("Node [Address: %p] - Int Value: %d\n", current_node, *(int *)current_node->value); 
 		current_node = current_node->next;
 	}
+	printf(" ---- End of List ---- \n\n");
 }

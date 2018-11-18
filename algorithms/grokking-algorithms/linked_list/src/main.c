@@ -11,6 +11,8 @@ main()
 		List_Add(l, (x + i));
 	}
 	List_Print(l);
+	List_Remove(l, 2);
+	List_Print(l);
 	List_Destroy(l);
 	return 0;
 }
