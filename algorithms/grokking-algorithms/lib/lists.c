@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define print_node(n, t)\
+	printf("Node [Address: %p] - Int Value: %d\n", n, *(t)(n->value))
+
 struct _node;
 
 typedef struct _node
@@ -43,7 +46,7 @@ List_Destroy(List *list)
 }
 
 void
-List_Add(List *list, void *value)
+List_Insert(List *list, void *value)
 {
 	if (list)
 	{
@@ -70,6 +73,42 @@ List_Add(List *list, void *value)
 }
 
 void
+List_Insert_At_Index(List *list, void *value, int index)
+{
+	if (list && index <= list->count)
+	{
+		Node *new_node = malloc(sizeof(Node));
+		if (new_node)
+		{
+			new_node->next = NULL;
+			new_node->previous = NULL;
+			new_node->value = value;
+			Node *search_node = list->first;
+			int i;
+			for (i = 0; i < index && search_node; i++)
+			{
+				search_node = search_node->next;
+			}
+			if (search_node->previous == NULL)
+			{
+				// check if it is beginning of list
+				new_node->next = search_node;
+				search_node->previous = new_node;
+				list->first = new_node;
+			}
+			else
+			{
+				search_node->previous->next = new_node;
+				new_node->previous = search_node->previous;
+				new_node->next = search_node;
+				search_node->previous = new_node;
+			}
+			list->count++;
+		}
+	}
+}
+
+void
 List_Remove(List *list, int element)
 {
 	if (element < list->count && element >= 0)
@@ -84,7 +123,7 @@ List_Remove(List *list, int element)
 		Node *next_node = current_node->next;
 		if (previous_node == NULL)
 		{
-			// checks if it is beginning of list
+			// check if it is beginning of list
 			list->first = next_node;
 			list->first->previous = NULL;
 		}
@@ -105,14 +144,14 @@ List_Remove(List *list, int element)
 }
 
 void
-List_Print(List *l)
+List_Print(List *list)
 {
-	Node *current_node = l->first;
+	Node *current_node = list->first;
 	printf(" ---- Beginning of List ---- \n");
-	printf(" ---- List Count: %3d   ---- \n", l->count);
+	printf(" ---- List Count: %3d   ---- \n", list->count);
 	while (current_node != NULL)
 	{
-		printf("Node [Address: %p] - Int Value: %d\n", current_node, *(int *)current_node->value); 
+		print_node(current_node, int *);
 		current_node = current_node->next;
 	}
 	printf(" ---- End of List ---- \n\n");

@@ -4,15 +4,17 @@
 int
 main()
 {
-	List *l = List_Create();
+	List *list = List_Create();
 	int x[5] = { 1, 2, 3, 4, 5, };
 	for (int i = 0; i < 5; i++)
 	{
-		List_Add(l, (x + i));
+		List_Insert(list, (x + i));
 	}
-	List_Print(l);
-	List_Remove(l, 2);
-	List_Print(l);
-	List_Destroy(l);
+	List_Print(list);
+	List_Remove(list, 2);
+	List_Print(list);
+	List_Insert_At_Index(list, (x + 2), 2);
+	List_Print(list);
+	List_Destroy(list);
 	return 0;
 }
