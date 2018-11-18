@@ -109,7 +109,7 @@ List_Insert_At_Index(List *list, void *value, int index)
 }
 
 void
-List_Remove(List *list, int element)
+List_Delete_At_Index(List *list, int element)
 {
 	if (element < list->count && element >= 0)
 	{

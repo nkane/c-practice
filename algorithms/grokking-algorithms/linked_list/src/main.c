@@ -11,7 +11,7 @@ main()
 		List_Insert(list, (x + i));
 	}
 	List_Print(list);
-	List_Remove(list, 2);
+	List_Delete_At_Index(list, 2);
 	List_Print(list);
 	List_Insert_At_Index(list, (x + 2), 2);
 	List_Print(list);
