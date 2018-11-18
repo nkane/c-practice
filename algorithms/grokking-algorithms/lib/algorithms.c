@@ -54,23 +54,25 @@ Binary_Search_Int(int *buffer, int size, int search)
 	Start_Time = clock();
 	int found = 0;
 	int min = 0;
-	int max = size;
+	int max = (size - 1);
 	int mid = 0;
-	while (min != size)
+	int guess = 0;
+	while (min <= max)
 	{
 		mid = ((min + max) / 2);
-		if (mid == search)
+		guess = *(buffer + mid);
+		if (guess == search)
 		{
 			found = 1;
 			break;
 		}
-		else if (search > mid)
+		else if (guess > search)
 		{
-			min = mid;
+			max = (mid - 1);
 		}
-		else if (search < mid)
+		else
 		{
-			max = mid;
+			min = mid + 1;
 		}
 	}
 	End_Time = clock();
