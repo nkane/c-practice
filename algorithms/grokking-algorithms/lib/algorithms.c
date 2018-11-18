@@ -34,9 +34,11 @@ Linear_Search_Int(int *buffer, int size, int search)
 	Start_Time = clock();
 	int i;
 	int found = 0;
+	int guess = 0;
 	for (i = 0; i < size; i++)
 	{
-		if (*(buffer + i) == search)
+		guess = *(buffer + i);
+		if (guess == search)
 		{
 			found = 1;
 			break;
