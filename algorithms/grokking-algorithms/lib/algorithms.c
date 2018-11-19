@@ -17,6 +17,10 @@
 #define print_time(t)\
 	printf("Time: %f seconds\n", t)\
 
+#define clock_print\
+	Spent_Time = time_delta(End_Time, Start_Time);\
+	print_time(Spent_Time)\
+
 global_variable clock_t Start_Time;
 global_variable clock_t End_Time;
 global_variable double Spent_Time;
@@ -130,6 +134,29 @@ Bubble_Sort(int *buffer, int size)
 	return 0;
 }
 
+int
+Selection_Sort(int *buffer, int size)
+{
+	start_clock;
+	int i = 0;
+	int j = 0;
+	int min_index;
+	for (i = 0; i < size - 1; i++)
+	{
+		min_index = i;
+		for (j = i + 1; j < size; j++)
+		{
+			if (*(buffer + j) < *(buffer + min_index))
+			{
+				min_index = j;
+			}
+		}
+		Swap((buffer + min_index), (buffer + i));
+	}
+	stop_clock;
+	clock_print;
+	return 0;
+}
 
 void
 Print_Array_Data(void *buffer, int size, const char formatter)
