@@ -63,8 +63,7 @@ Linear_Search_Int(int *buffer, int size, int search)
 		}
 	}
 	stop_clock;
-	Spent_Time = time_delta(End_Time, Start_Time);
-	print_time(Spent_Time);
+	clock_print;
 	return found;
 }
 
@@ -96,8 +95,7 @@ Binary_Search_Int(int *buffer, int size, int search)
 		}
 	}
 	stop_clock;
-	Spent_Time = time_delta(End_Time, Start_Time);
-	print_time(Spent_Time);
+	clock_print;
 	return found;
 }
 
@@ -129,8 +127,7 @@ Bubble_Sort(int *buffer, int size)
 		}
 	}
 	stop_clock;
-	Spent_Time = time_delta(End_Time, Start_Time);
-	print_time(Spent_Time);
+	clock_print;
 	return 0;
 }
 
